@@ -11,6 +11,7 @@ export function initCrosshair(options = {}) {
     wrapper = document.createElement('div');
     wrapper.id = 'crosshair-wrapper';
     wrapper.className = 'fixed top-0 left-0 w-full h-full pointer-events-none z-[99999]';
+    wrapper.style.display = 'none'; // Hidden until loader finishes
     wrapper.innerHTML = `
       <svg class="absolute top-0 left-0 w-full h-full pointer-events-none">
         <defs>
@@ -53,6 +54,18 @@ export function initCrosshair(options = {}) {
     mouse.y = ev.clientY;
 
     if (!initialized) {
+      // Don't show crosshair while the loader is still visible
+      const loader = document.querySelector('.black');
+      if (loader) {
+        const style = window.getComputedStyle(loader);
+        if (style.display !== 'none' && style.visibility !== 'hidden' && parseFloat(style.opacity) > 0) {
+          return;
+        }
+      }
+
+      // Loader is gone — show the crosshair wrapper
+      wrapper.style.display = '';
+
       initialized = true;
       renderedStyles.tx.previous = renderedStyles.tx.current = mouse.x;
       renderedStyles.ty.previous = renderedStyles.ty.current = mouse.y;

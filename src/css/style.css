@@ -359,6 +359,11 @@ h3 {
     box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.85), 0 35px 70px rgba(0, 0, 0, 0.98), 0 0 30px rgba(210, 111, 141, 0.3);
 }
 
+/* ── Hide cursor during loader ── */
+.black, .black *, .green-div {
+    cursor: none !important;
+}
+
 /* ── Custom Compact Cursor & Pointer from Assets ── */
 html, body, *, ::before, ::after {
     cursor: url('../assets/cursor/cursor_32x32.png') 4 4, url('../assets/cursor/cursor_small.cur') 4 4, auto !important;
