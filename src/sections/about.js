@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import initScrollReveal from '../utils/scrollReveal.js';
 import initFoldText from '../utils/foldText.js';
+import initScrollStack from '../utils/scrollStack.js';
 
 // locomation
 const scroll = new LocomotiveScroll({
@@ -9,6 +10,7 @@ const scroll = new LocomotiveScroll({
   smooth: true,
   lerp: 0.03
 });
+window.locomotiveScrollInstance = scroll;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,9 +91,10 @@ tl.to(".green-div", {
 
 tl.set(".green-div", { display: "none" });
 
-// Trigger FoldText 3D unfolding animation after loader completes
+// Trigger animations after loader completes
 tl.call(() => {
   initFoldText('[data-fold-text]');
+  initScrollStack('.scroll-stack-container');
 });
 
 
